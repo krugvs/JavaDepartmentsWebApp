@@ -1,4 +1,4 @@
-package com.krugvs.javatest.servlets;
+package com.krugvs.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

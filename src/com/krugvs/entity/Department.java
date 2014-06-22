@@ -1,4 +1,4 @@
-package com.krugvs.javatest.entity;
+package com.krugvs.entity;
 
 import java.util.ArrayList;
 import java.util.List;

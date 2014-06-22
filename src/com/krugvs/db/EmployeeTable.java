@@ -1,4 +1,4 @@
-package com.krugvs.javatest.db;
+package com.krugvs.db;
 
 /**
  * Created by vlad on 6/18/14.
