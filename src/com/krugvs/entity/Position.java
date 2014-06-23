@@ -7,38 +7,39 @@ import java.util.ArrayList;
  * Created by vlad on 6/18/14.
  */
 public class Position {
-    private int id;
-    final private String name;
-    private BigDecimal mixSalary;
-    private BigDecimal maxSalary;
+    private Integer id;
+    private String name;
+    private BigDecimal minSalary = BigDecimal.ZERO;
+    private BigDecimal maxSalary = BigDecimal.ZERO;
     private ArrayList<Employee> employees;
 
     /**
      *
      * @param name
      */
-    public Position(String name) {
+    public Position(Integer id, String name) {
         this.name = name;
+        this.id   = id;
         employees= new ArrayList<Employee>();
     }
 
     /**
      *
      * @param name
-     * @param mixSalary
+     * @param minSalary
      * @param maxSalary
      */
-    public Position(String name, BigDecimal mixSalary, BigDecimal maxSalary) {
-        this(name);
-        this.mixSalary = mixSalary;
+    public Position(Integer id, String name, BigDecimal minSalary, BigDecimal maxSalary) {
+        this(id, name);
+        this.minSalary = minSalary;
         this.maxSalary = maxSalary;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -46,12 +47,12 @@ public class Position {
         return name;
     }
 
-    public BigDecimal getMixSalary() {
-        return mixSalary;
+    public BigDecimal getMinSalary() {
+        return minSalary;
     }
 
-    public void setMixSalary(BigDecimal mixSalary) {
-        this.mixSalary = mixSalary;
+    public void setMinSalary(BigDecimal minSalary) {
+        this.minSalary = minSalary;
     }
 
     public BigDecimal getMaxSalary() {
@@ -75,7 +76,7 @@ public class Position {
         return "Position{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", mixSalary=" + mixSalary +
+                ", minSalary=" + minSalary +
                 ", maxSalary=" + maxSalary +
                 ", employees=" + employees +
                 '}';

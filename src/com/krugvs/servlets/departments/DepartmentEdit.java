@@ -21,7 +21,6 @@ public class DepartmentEdit  extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req);
         Integer id = Integer.parseInt(req.getParameter("id").trim());
         if (id!=0) {
             Connection con = (Connection) getServletContext().getAttribute("DBConnection");

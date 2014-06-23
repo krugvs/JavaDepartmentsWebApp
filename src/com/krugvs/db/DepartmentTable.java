@@ -10,18 +10,12 @@ import java.util.List;
 /**
  * Created by vlad on 6/18/14.
  */
-public class DepartmentTable {
-
-    /**
-     *
-     */
-    private Connection con = null;
-
+public class DepartmentTable extends DbTable {
     /**
      * @param con
      */
     public DepartmentTable(Connection con) {
-        this.con = con;
+        super(con);
     }
 
     /**
@@ -82,7 +76,7 @@ public class DepartmentTable {
     public Department getDepartmentById(Integer id) {
         try {
 
-            PreparedStatement st = con.prepareStatement("select id, name from departments where id=?");
+            PreparedStatement st = con.prepareStatement("select id, name from departments where id= (?) ");
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {

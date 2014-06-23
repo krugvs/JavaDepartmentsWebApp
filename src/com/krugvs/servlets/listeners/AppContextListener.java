@@ -39,6 +39,7 @@ public class AppContextListener implements ServletContextListener {
         Connection con = (Connection) servletContextEvent.getServletContext().getAttribute("DBConnection");
         try {
             con.close();
+            System.out.println("DB Connection closed successfully.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
