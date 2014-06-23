@@ -7,24 +7,23 @@ import java.util.List;
  * Created by vlad on 6/18/14.
  */
 public class Department {
-    private int id;
+    private Integer id =  null;
     private String name;
-    private ArrayList<Position> positions;
-
-    public Department() {
-        positions = new ArrayList<Position>();
-    }
 
     public Department(String name) {
-        this();
         this.name = name;
     }
 
-    public int getId() {
+    public Department(String name, int id) {
+        this(name);
+        this.id = id;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -34,34 +33,6 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Position> getPositions() {
-        return positions;
-    }
-
-    /**
-     *
-     * @param positions
-     */
-    public void setPositions(ArrayList<Position> positions) {
-        this.positions = positions;
-    }
-
-    public void addPosition(Position position){
-        positions.add(position);
-    }
-
-    /**
-     *
-     * @return
-     */
-    public List<Employee> getEmployees(){
-        List<Employee> employees = new ArrayList<Employee>() ;
-        for (Position position : positions) {
-            employees.addAll(position.getEmployees());
-        }
-        return employees;
     }
 
     @Override

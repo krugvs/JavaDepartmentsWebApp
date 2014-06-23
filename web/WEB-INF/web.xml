@@ -4,14 +4,72 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <servlet>
-        <servlet-name>s1n</servlet-name>
-        <servlet-class>com.krugvs.servlets.Servlet1New</servlet-class>
+        <servlet-name>StartPage</servlet-name>
+        <servlet-class>com.krugvs.servlets.StartPage</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>s1n</servlet-name>
-        <url-pattern>/test.jsp</url-pattern>
+        <servlet-name>StartPage</servlet-name>
+        <url-pattern>/index</url-pattern>
+
     </servlet-mapping>
+
+    <context-param>
+        <param-name>dbUser</param-name>
+        <param-value>ODBC</param-value>
+    </context-param>
+    <context-param>
+        <param-name>dbPassword</param-name>
+        <param-value>ODBC</param-value>
+    </context-param>
+    <context-param>
+        <param-name>dbURL</param-name>
+        <param-value>jdbc:mysql://localhost:3306/java_departments?useUnicode=true&amp;characterEncoding=UTF-8</param-value>
+    </context-param>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error</location>
+    </error-page>
+
+
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
+
+    <security-constraint>
+        <display-name>Restrict access to JSP pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>
+                Restrict access to JSP pages
+            </web-resource-name>
+            <url-pattern>*.jsp</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>
+                With no roles defined, no access granted
+            </description>
+        </auth-constraint>
+    </security-constraint>
+
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>com.krugvs.servlets.filters.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+
 
 
 </web-app>
