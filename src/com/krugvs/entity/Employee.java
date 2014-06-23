@@ -4,13 +4,34 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Created by vlad on 6/18/14.
+ * Created by vlad on 6/24/14.
  */
 public class Employee {
+    private Integer id;
     private String name;
     private Date birthday;
     private String passportNumber;
     private BigDecimal salary;
+    private Department department;
+    private Position position;
+
+    public Employee(Integer id, String name, Date birthday, String passportNumber, BigDecimal salary, Department department, Position position) {
+        this.id = id;
+        this.name = name;
+        this.birthday = birthday;
+        this.passportNumber = passportNumber;
+        this.salary = salary;
+        this.department = department;
+        this.position = position;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -44,13 +65,32 @@ public class Employee {
         this.salary = salary;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", birthday=" + birthday +
                 ", passportNumber='" + passportNumber + '\'' +
                 ", salary=" + salary +
+                ", department=" + department +
+                ", position=" + position +
                 '}';
     }
 }

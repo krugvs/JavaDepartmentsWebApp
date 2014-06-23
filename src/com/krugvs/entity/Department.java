@@ -40,7 +40,6 @@ public class Department {
         return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-               // ", positions=" + positions +
                 '}';
     }
 }
