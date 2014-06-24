@@ -1,7 +1,11 @@
 package com.krugvs.servlets.employees;
 
+import com.krugvs.db.DepartmentTable;
 import com.krugvs.db.EmployeeTable;
+import com.krugvs.db.PositionTable;
+import com.krugvs.entity.Department;
 import com.krugvs.entity.Employee;
+import com.krugvs.entity.Position;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by vlad on 6/24/14.
@@ -30,6 +35,28 @@ public class EmployeeEdit  extends HttpServlet {
                 req.setAttribute("employee", employee);
                 req.setAttribute("employeeId", id);
                 req.setAttribute("actionUrl", req.getContextPath() + "/employees/edit/?id="+id);
+
+                DepartmentTable dt = new DepartmentTable(con);
+                java.util.List<Department> listDepartments = new ArrayList<Department>();
+                try {
+                    listDepartments = dt.getDepartments();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                req.setAttribute("listDepartments", listDepartments);
+
+                PositionTable positionTablet = new PositionTable(con);
+                java.util.List<Position> listPositions = new ArrayList<Position>();
+                try {
+                    listPositions = positionTablet.getPositions();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                req.setAttribute("listPositions", listPositions);
                 getServletContext().getRequestDispatcher("/employees/add.jsp").forward(req, resp);
             }
             else{

@@ -11,21 +11,20 @@
 <%@ page import="com.krugvs.entity.Employee" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.krugvs.entity.Employee" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/elements/header.jsp" />
-<%
-    Employee employee = (Employee)request.getAttribute("employee");
-    Integer employeeId  = (Integer)request.getAttribute("employeeId");
-    String actionUrl      = request.getAttribute("actionUrl").toString();
-%>
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Employees:  <% if (employeeId!=null){%>
-            <%="Edit \""+employee.getName()+"\""%>
-            <%}else{%>
-            Add new
-            <%}%></h1>
+        <h1 class="page-header">Employees:
+            <c:if test="${requestScope.employee.id ne null}">
+                Edit <c:out value="${requestScope.employee.name}"/>
+            </c:if>
+            <c:if test="${requestScope.employee.id eq null}">
+                Add new employee
+            </c:if>
+        </h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -35,49 +34,46 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <% if (employeeId!=null){%>
-                <%="Edit \""+employee.getName()+"\""%>
-                <%}else{%>
-                Add new employee
-                <%}%>
+                <c:if test="${requestScope.employee.id ne null}">
+                    Edit <c:out value="${requestScope.employee.name}"/>
+                </c:if>
+                <c:if test="${requestScope.employee.id eq null}">
+                    Add new employee
+                </c:if>
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form role="form" action="<%=actionUrl%>" enctype="application/x-www-form-urlencoded" method="post">
+                        <form role="form" action="<c:out value="${requestScope.actionUrl}"/>" enctype="application/x-www-form-urlencoded" method="post">
                             <div class="form-group">
                                 <label>Employee name</label>
-                                <input class="form-control" placeholder="Please type employee name" value="<%=employee.getName()%>" name="name">
-                                <input value="<%=employeeId%>" name="id" type="hidden">
+                                <input class="form-control" placeholder="Please type employee name" value="<c:out value="${requestScope.employee.name}"/>" name="name">
+                                <input value="<c:out value="${requestScope.employeeId}"/>" name="id" type="hidden">
                             </div>
                             <div class="form-group">
                                 <label>Birthday</label>
-                                <input class="form-control" placeholder="Please type employee name" value="<%=employee.getBirthday()%>" name="name">
+                                <input class="form-control" placeholder="Please type employee name" value="<c:out value="${requestScope.employee.birthday}"/>" name="name">
                             </div>
                             <label class="control-label" >Salary</label>
                             <div class="form-group input-group">
                                 <span class="input-group-addon">$</span>
-                                <input type="number" class="form-control" name="minSalary" min="0" value="<%=minSalary%>">
+                                <input type="number" class="form-control" name="salary" min="0" value="<c:out value="${requestScope.employee.salary}"/>">
                                 <span class="input-group-addon">.00</span>
                             </div>
                             <div class="form-group">
                                 <label>Department</label>
                                 <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    <c:forEach var="department" items="${requestScope.listDepartments}">
+                                        <option value="<c:out value="${department.id}"/>" ><c:out value="${department.name}"/></option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Posiotion</label>
+                                <label>Position</label>
                                 <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    <c:forEach var="position" items="${requestScope.listPositions}">
+                                        <option value="<c:out value="${position.id}"/>" ><c:out value="${position.name}"/></option>
+                                    </c:forEach>
                                 </select>
                             </div>
 
