@@ -68,7 +68,7 @@ public class PositionEdit  extends HttpServlet {
             resp.setHeader("Location", req.getContextPath() + "/positions");
         }
         req.setAttribute("positionName", name);
-        req.setAttribute("positionName", id);
+        req.setAttribute("positionId", id);
         req.setAttribute("minSalary", minSalary);
         req.setAttribute("maxSalary", maxSalary);
         req.setAttribute("actionUrl", req.getContextPath() + "/positions/edit/?id="+id);

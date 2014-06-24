@@ -4,12 +4,6 @@
     <!-- Define the properties used by the build -->
     <property name="app.name"     value="DA Departments web app"/>
     <property name="lib"     value="${basedir}/web/WEB-INF/lib" />
-    <property name="struts.home"     value="${basedir}/lib/struts-lib" />
-    <property name="hibernate.home"  value="${basedir}/lib/hibernate-lib" />
-    <property name="axis2.home"      value="${basedir}/lib/axis-lib" />
-    <property name="poi.home"        value="${basedir}/lib/pom-lib" />
-    <property name="mysql.home"      value="${basedir}/lib/mysql-lib" />
-    <property name="log4j.home"      value="${basedir}/lib/log4j-lib" />
     <property name="work.home"       value="${basedir}/work"/>
     <property name="dist.home"       value="${basedir}/dist"/>
     <property name="src.home"        value="${basedir}/src"/>

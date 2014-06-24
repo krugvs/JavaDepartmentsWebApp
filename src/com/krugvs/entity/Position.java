@@ -11,7 +11,6 @@ public class Position {
     private String name;
     private BigDecimal minSalary = BigDecimal.ZERO;
     private BigDecimal maxSalary = BigDecimal.ZERO;
-    private ArrayList<Employee> employees;
 
     /**
      *
@@ -20,7 +19,6 @@ public class Position {
     public Position(Integer id, String name) {
         this.name = name;
         this.id   = id;
-        employees= new ArrayList<Employee>();
     }
 
     /**
@@ -63,13 +61,6 @@ public class Position {
         this.maxSalary = maxSalary;
     }
 
-    public ArrayList<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(ArrayList<Employee> employees) {
-        this.employees = employees;
-    }
 
     @Override
     public String toString() {
@@ -78,7 +69,6 @@ public class Position {
                 ", name='" + name + '\'' +
                 ", minSalary=" + minSalary +
                 ", maxSalary=" + maxSalary +
-                ", employees=" + employees +
                 '}';
     }
 }

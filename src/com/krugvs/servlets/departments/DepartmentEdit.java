@@ -63,7 +63,7 @@ public class DepartmentEdit  extends HttpServlet {
             resp.setHeader("Location", req.getContextPath() + "/departments");
         }
         req.setAttribute("departmentName", name);
-        req.setAttribute("departmentName", id);
+        req.setAttribute("departmentId", id);
         req.setAttribute("actionUrl", req.getContextPath() + "/departments/edit/?id="+id);
         getServletContext().getRequestDispatcher("/departments/add.jsp").forward(req, resp);
     }
