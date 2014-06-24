@@ -51,11 +51,11 @@
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Departments<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="/departments">List departments</a>
+                        <a href="<%=request.getContextPath()%>/departments">List departments</a>
 
                     </li>
                     <li>
-                        <a href="/departments/add">Add new department</a>
+                        <a href="<%=request.getContextPath()%>/departments/add">Add new department</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -64,11 +64,11 @@
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Positions<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="/positions">List positions</a>
+                        <a href="<%=request.getContextPath()%>/positions">List positions</a>
 
                     </li>
                     <li>
-                        <a href="/positions/add">Add new positions</a>
+                        <a href="<%=request.getContextPath()%>/positions/add">Add new positions</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -78,11 +78,11 @@
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Employees<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="/employees">List Employees</a>
+                        <a href="<%=request.getContextPath()%>/employees">List Employees</a>
 
                     </li>
                     <li>
-                        <a href="/employees/add">Add new employee</a>
+                        <a href="<%=request.getContextPath()%>/employees/add">Add new employee</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

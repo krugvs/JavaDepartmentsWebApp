@@ -30,7 +30,7 @@ public class DepartmentEdit  extends HttpServlet {
             if (department.getId()!=null) {
                 req.setAttribute("departmentName", department.getName());
                 req.setAttribute("departmentId", department.getId());
-                req.setAttribute("actionUrl", "/departments/edit/?id="+id);
+                req.setAttribute("actionUrl", req.getContextPath() + "/departments/edit/?id="+id);
                 getServletContext().getRequestDispatcher("/departments/add.jsp").forward(req, resp);
             }
             else{
@@ -39,7 +39,7 @@ public class DepartmentEdit  extends HttpServlet {
 
         }else{
             resp.setStatus(resp.SC_MOVED_TEMPORARILY);
-            resp.setHeader("Location", "/departments");
+            resp.setHeader("Location", req.getContextPath() + "/departments");
         }
 
     }
@@ -60,11 +60,11 @@ public class DepartmentEdit  extends HttpServlet {
                 //TODO handle this
             }
             resp.setStatus(resp.SC_MOVED_TEMPORARILY);
-            resp.setHeader("Location", "/departments");
+            resp.setHeader("Location", req.getContextPath() + "/departments");
         }
         req.setAttribute("departmentName", name);
         req.setAttribute("departmentName", id);
-        req.setAttribute("actionUrl", "/departments/edit/?id="+id);
+        req.setAttribute("actionUrl", req.getContextPath() + "/departments/edit/?id="+id);
         getServletContext().getRequestDispatcher("/departments/add.jsp").forward(req, resp);
     }
 }

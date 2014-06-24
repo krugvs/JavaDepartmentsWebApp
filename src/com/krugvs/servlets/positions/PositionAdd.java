@@ -24,7 +24,7 @@ public class PositionAdd  extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("positionName", "");
         req.setAttribute("positionId", null);
-        req.setAttribute("actionUrl", "/positions/add");
+        req.setAttribute("actionUrl", req.getContextPath() + "/positions/add");
 
         getServletContext().getRequestDispatcher("/positions/add.jsp").forward(req, resp);
     }
@@ -46,11 +46,11 @@ public class PositionAdd  extends HttpServlet {
                 //TODO handle this
             }
             resp.setStatus(resp.SC_MOVED_TEMPORARILY);
-            resp.setHeader("Location", "/positions");
+            resp.setHeader("Location", req.getContextPath() + "/positions");
         }
         req.setAttribute("positionName", name);
         req.setAttribute("positionId", null);
-        req.setAttribute("actionUrl", "/positions/add");
+        req.setAttribute("actionUrl", req.getContextPath() + "/positions/add");
         getServletContext().getRequestDispatcher("/positions/add.jsp").forward(req, resp);
     }
 }

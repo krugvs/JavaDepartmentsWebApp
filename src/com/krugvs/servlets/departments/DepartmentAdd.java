@@ -23,7 +23,7 @@ public class DepartmentAdd  extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("departmentName", "");
         req.setAttribute("departmentId", null);
-        req.setAttribute("actionUrl", "/departments/add");
+        req.setAttribute("actionUrl", req.getContextPath() + "/departments/add");
 
         getServletContext().getRequestDispatcher("/departments/add.jsp").forward(req, resp);
     }
@@ -43,11 +43,11 @@ public class DepartmentAdd  extends HttpServlet {
                 //TODO handle this
             }
             resp.setStatus(resp.SC_MOVED_TEMPORARILY);
-            resp.setHeader("Location", "/departments");
+            resp.setHeader("Location", req.getContextPath() + "/departments");
         }
         req.setAttribute("departmentName", name);
         req.setAttribute("departmentId", null);
-        req.setAttribute("actionUrl", "/departments/add");
+        req.setAttribute("actionUrl", req.getContextPath() + "/departments/add");
         getServletContext().getRequestDispatcher("/departments/add.jsp").forward(req, resp);
     }
 }

@@ -31,7 +31,7 @@ public class PositionEdit  extends HttpServlet {
             if (position.getId()!=null) {
                 req.setAttribute("positionName", position.getName());
                 req.setAttribute("positionId", position.getId());
-                req.setAttribute("actionUrl", "/positions/edit/?id="+id);
+                req.setAttribute("actionUrl", req.getContextPath() + "/positions/edit/?id="+id);
                 req.setAttribute("minSalary", position.getMinSalary());
                 req.setAttribute("maxSalary", position.getMaxSalary());
                 getServletContext().getRequestDispatcher("/positions/add.jsp").forward(req, resp);
@@ -42,7 +42,7 @@ public class PositionEdit  extends HttpServlet {
 
         }else{
             resp.setStatus(resp.SC_MOVED_TEMPORARILY);
-            resp.setHeader("Location", "/positions");
+            resp.setHeader("Location", req.getContextPath() + "/positions");
         }
 
     }
@@ -65,13 +65,13 @@ public class PositionEdit  extends HttpServlet {
                 //TODO handle this
             }
             resp.setStatus(resp.SC_MOVED_TEMPORARILY);
-            resp.setHeader("Location", "/positions");
+            resp.setHeader("Location", req.getContextPath() + "/positions");
         }
         req.setAttribute("positionName", name);
         req.setAttribute("positionName", id);
         req.setAttribute("minSalary", minSalary);
         req.setAttribute("maxSalary", maxSalary);
-        req.setAttribute("actionUrl", "/positions/edit/?id="+id);
+        req.setAttribute("actionUrl", req.getContextPath() + "/positions/edit/?id="+id);
         getServletContext().getRequestDispatcher("/positions/add.jsp").forward(req, resp);
     }
 }
