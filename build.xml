@@ -2,8 +2,8 @@
 
 <project name="firstProject" default="All" basedir=".">
     <!-- Define the properties used by the build -->
-    <property name="app.name"     value="Nielsen_Portal_New1"/>
-    <property name="tomcat.home"     value="${basedir}/lib/tomcat-lib" />
+    <property name="app.name"     value="DA Departments web app"/>
+    <property name="lib"     value="${basedir}/web/WEB-INF/lib" />
     <property name="struts.home"     value="${basedir}/lib/struts-lib" />
     <property name="hibernate.home"  value="${basedir}/lib/hibernate-lib" />
     <property name="axis2.home"      value="${basedir}/lib/axis-lib" />
@@ -13,29 +13,11 @@
     <property name="work.home"       value="${basedir}/work"/>
     <property name="dist.home"       value="${basedir}/dist"/>
     <property name="src.home"        value="${basedir}/src"/>
-    <property name="web.home"        value="${basedir}/WebContent"/>
+    <property name="web.home"        value="${basedir}/web"/>
 
     <!-- Define the CLASSPATH -->
     <path id="compile.classpath">
-        <fileset dir="${tomcat.home}">
-            <include name="*.jar"/>
-        </fileset>
-        <fileset dir="${struts.home}">
-            <include name="*.jar"/>
-        </fileset>
-        <fileset dir="${hibernate.home}">
-            <include name="*.jar"/>
-        </fileset>
-        <fileset dir="${axis2.home}">
-            <include name="*.jar"/>
-        </fileset>
-        <fileset dir="${poi.home}">
-            <include name="*.jar"/>
-        </fileset>
-        <fileset dir="${log4j.home}">
-            <include name="*.jar"/>
-        </fileset>
-        <fileset dir="${mysql.home}">
+        <fileset dir="${lib}">
             <include name="*.jar"/>
         </fileset>
     </path>
@@ -73,4 +55,4 @@
             <classes dir="${work.home}/WEB-INF/classes"/>
         </war>
     </target>
-</project> 
+</project>
