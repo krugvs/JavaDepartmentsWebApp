@@ -82,7 +82,7 @@
 
                     </li>
                     <li>
-                        <a href="<%=request.getContextPath()%>/employees/add">Add new employee</a>
+                        <a href="<%=request.getContextPath()%>/employees/edit/?id=0">Add new employee</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

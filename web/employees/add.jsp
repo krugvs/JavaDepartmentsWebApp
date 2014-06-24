@@ -64,15 +64,19 @@
                                 <label>Department</label>
                                 <select class="form-control">
                                     <c:forEach var="department" items="${requestScope.listDepartments}">
-                                        <option value="<c:out value="${department.id}"/>" ><c:out value="${department.name}"/></option>
+                                        <option value="<c:out value="${department.id}"/>"
+                                                <c:if test="${requestScope.employee.department.id==department.id}"> selected </c:if>
+                                                ><c:out value="${department.name}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Position</label>
                                 <select class="form-control">
-                                    <c:forEach var="position" items="${requestScope.listPositions}">
-                                        <option value="<c:out value="${position.id}"/>" ><c:out value="${position.name}"/></option>
+                                    <c:forEach var="position" items="${requestScope.listPositions}" varStatus="loopStatus">
+                                        <option value="<c:out value="${position.id}"/>"
+                                                <c:if test="${requestScope.employee.position.id==position.id}"> selected </c:if>
+                                        ><c:out value="${position.name}"/></option>
                                     </c:forEach>
                                 </select>
                             </div>

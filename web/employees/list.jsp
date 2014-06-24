@@ -84,7 +84,7 @@
 <script>
     $(document).ready(function() {
         $(".addNewEmployee").on('click', function(){
-            document.location = '<%=request.getContextPath()%>/employees/add'
+            document.location = '<%=request.getContextPath()%>/employees/edit/?id=0'
         });
 
         $('#dataTables-example').dataTable();

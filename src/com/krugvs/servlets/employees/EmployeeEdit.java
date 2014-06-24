@@ -26,47 +26,44 @@ public class EmployeeEdit  extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter("id").trim());
+
+        Connection con = (Connection) getServletContext().getAttribute("DBConnection");
+        DepartmentTable dt = new DepartmentTable(con);
+        java.util.List<Department> listDepartments = new ArrayList<Department>();
+        try {
+            listDepartments = dt.getDepartments();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        req.setAttribute("listDepartments", listDepartments);
+
+        PositionTable positionTablet = new PositionTable(con);
+        java.util.List<Position> listPositions = new ArrayList<Position>();
+        try {
+            listPositions = positionTablet.getPositions();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        req.setAttribute("listPositions", listPositions);
+
         if (id!=0) {
-            Connection con = (Connection) getServletContext().getAttribute("DBConnection");
             EmployeeTable employeeTable = new EmployeeTable(con);
             Employee employee;
             employee = employeeTable.getEmployeeById(id);
             if (employee!=null) {
                 req.setAttribute("employee", employee);
                 req.setAttribute("employeeId", id);
-                req.setAttribute("actionUrl", req.getContextPath() + "/employees/edit/?id="+id);
-
-                DepartmentTable dt = new DepartmentTable(con);
-                java.util.List<Department> listDepartments = new ArrayList<Department>();
-                try {
-                    listDepartments = dt.getDepartments();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                req.setAttribute("listDepartments", listDepartments);
-
-                PositionTable positionTablet = new PositionTable(con);
-                java.util.List<Position> listPositions = new ArrayList<Position>();
-                try {
-                    listPositions = positionTablet.getPositions();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                req.setAttribute("listPositions", listPositions);
-                getServletContext().getRequestDispatcher("/employees/add.jsp").forward(req, resp);
             }
-            else{
-
-            }
-
         }else{
-            resp.setStatus(resp.SC_MOVED_TEMPORARILY);
-            resp.setHeader("Location", req.getContextPath() + "/employees");
+            req.setAttribute("employee", null);
+            req.setAttribute("employeeId", null);
         }
+        req.setAttribute("actionUrl", req.getContextPath() + "/employees/edit/?id="+id);
+        getServletContext().getRequestDispatcher("/employees/add.jsp").forward(req, resp);
 
     }
 /*
