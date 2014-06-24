@@ -24,7 +24,7 @@ public class PositionTable extends DbTable {
      * @throws ClassNotFoundException
      */
     public List<Position> getPositions() throws SQLException, ClassNotFoundException {
-        List<Position> positions = new ArrayList<>();
+        List<Position> positions = new ArrayList<Position>();
         try (
                 Statement st = con.createStatement()
         ) {

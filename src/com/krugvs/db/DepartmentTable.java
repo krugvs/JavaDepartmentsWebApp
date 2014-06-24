@@ -24,7 +24,7 @@ public class DepartmentTable extends DbTable {
      * @throws ClassNotFoundException
      */
     public List<Department> getDepartments() throws SQLException, ClassNotFoundException {
-        List<Department> departments = new ArrayList<>();
+        List<Department> departments = new ArrayList<Department>();
         try (
                 Statement st = con.createStatement()
         ) {
