@@ -7,6 +7,7 @@ import com.krugvs.entity.Position;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 /**
@@ -64,7 +65,7 @@ public class EmployeeTable extends DbTable {
     public Employee getEmployeeById(Integer id) {
         try {
 
-            PreparedStatement st = con.prepareStatement("SELECT `employees`.*, `departments`.*,  `positions`.* FROM `employees` JOIN `departments` ON employees.department_id=departments.id  JOIN `positions` ON employees.position_id=positions.id where employees.id =? ");
+            PreparedStatement st = con.prepareStatement("SELECT `employees`.*, `departments`.*,  `positions`.* FROM `employees` JOIN `departments` ON employees.department_id=departments.id  JOIN `positions` ON employees.position_id=positions.id where employees.id = ? ");
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
@@ -92,6 +93,48 @@ public class EmployeeTable extends DbTable {
             return null;
         }
 
+    }
+
+    /**
+     * @param employee
+     */
+    public void saveEmployee(Employee employee) throws SQLException {
+        if (employee.getId() == null) {
+            insert(employee);
+        } else {
+            update(employee);
+        }
+    }
+
+    /**
+     * @param employee
+     */
+    protected void insert(Employee employee) throws SQLException {
+        PreparedStatement st = con.prepareStatement("INSERT INTO employees (name, minSalary, maxSalary) VALUES ((?),(?),(?))");
+        st.setString(1, employee.getName());
+        //st.setBigDecimal(2, employee.getMinSalary());
+        //st.setBigDecimal(3, employee.getMaxSalary());
+        st.execute();
+    }
+
+    /**
+     * @param employee
+     */
+    protected void update(Employee employee) throws SQLException {
+        PreparedStatement st = con.prepareStatement("UPDATE  `employees` SET  `username` =  ? ,\n" +
+                "`birthday` =  ? ,\n" +
+                "`passport` =  ? ,\n" +
+                "`salary` =  ? ,\n" +
+                "`department_id` =  ? ,\n" +
+                "`position_id` =  ? WHERE  `employees`.`id` = ?;");
+        st.setString(1, employee.getName());
+        st.setDate(2, new java.sql.Date(employee.getBirthday().getTime()));
+        st.setString(3, employee.getPassportNumber());
+        st.setBigDecimal(4, employee.getSalary());
+        st.setInt(5, employee.getDepartment().getId());
+        st.setInt(6, employee.getPosition().getId());
+        st.setInt(7, employee.getId());
+        st.execute();
     }
 
     protected class Registry<T> {

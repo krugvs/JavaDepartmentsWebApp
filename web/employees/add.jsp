@@ -52,7 +52,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Birthday</label>
-                                <input class="form-control" placeholder="Please type employee name" value="<c:out value="${requestScope.employee.birthday}"/>" name="name">
+                                <input class="form-control" placeholder="Please type Birthday" value="<c:out value="${requestScope.employee.birthday}"/>" name="birthday">
+                            </div>
+                            <div class="form-group">
+                                <label>Passport number</label>
+                                <input class="form-control" placeholder="Please type Passport number" value="<c:out value="${requestScope.employee.passportNumber}"/>" name="passportNumber">
                             </div>
                             <label class="control-label" >Salary</label>
                             <div class="form-group input-group">
@@ -62,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Department</label>
-                                <select class="form-control">
+                                <select class="form-control" name="department_id">
                                     <c:forEach var="department" items="${requestScope.listDepartments}">
                                         <option value="<c:out value="${department.id}"/>"
                                                 <c:if test="${requestScope.employee.department.id==department.id}"> selected </c:if>
@@ -72,7 +76,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Position</label>
-                                <select class="form-control">
+                                <select class="form-control" name="position_id">
                                     <c:forEach var="position" items="${requestScope.listPositions}" varStatus="loopStatus">
                                         <option value="<c:out value="${position.id}"/>"
                                                 <c:if test="${requestScope.employee.position.id==position.id}"> selected </c:if>

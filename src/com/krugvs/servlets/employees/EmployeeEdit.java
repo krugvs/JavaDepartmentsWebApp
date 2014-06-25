@@ -13,9 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by vlad on 6/24/14.
@@ -66,20 +70,34 @@ public class EmployeeEdit  extends HttpServlet {
         getServletContext().getRequestDispatcher("/employees/add.jsp").forward(req, resp);
 
     }
-/*
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name").trim();
+        String passportNumber = req.getParameter("passportNumber").trim();
         Integer id = Integer.parseInt(req.getParameter("id").trim());
+        Integer position_id = Integer.parseInt(req.getParameter("position_id").trim());
+        Integer department_id = Integer.parseInt(req.getParameter("department_id").trim());
+        BigDecimal salary = new BigDecimal(req.getParameter("salary").trim());
+        String birthDayStr = req.getParameter("birthday").trim();
 
-        if (!name.equals("") && id!=0) {
-            Employee employee = new Employee(name, id);
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date birthday = new Date() ;
+
+        try {
+            birthday = ft.parse(birthDayStr);
+            System.out.println(birthday);
+        } catch (ParseException e) {
+            System.out.println("Unparseable using " + ft);
+        }
+
+        if (!name.equals("")) {
+            Employee employee = new Employee(id,name, birthday, passportNumber, salary, new Department("", department_id), new Position(position_id, ""));
             Connection con = (Connection) getServletContext().getAttribute("DBConnection");
             EmployeeTable dt = new EmployeeTable(con);
-
             try {
-                //dt.saveEmployee(employee);
-                dt=dt;
+                dt.saveEmployee(employee);
             } catch (SQLException e) {
                 e.printStackTrace();
                 //TODO handle this
@@ -93,6 +111,6 @@ public class EmployeeEdit  extends HttpServlet {
         req.setAttribute("actionUrl", req.getContextPath() + "/employees/edit/?id="+id);
         getServletContext().getRequestDispatcher("/employees/add.jsp").forward(req, resp);
     }
-    */
+
 }
 
