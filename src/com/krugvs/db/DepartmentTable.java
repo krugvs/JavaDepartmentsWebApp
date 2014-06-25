@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class to manage db requests for Department
  * Created by vlad on 6/18/14.
+ * @author vlad
  */
 public class DepartmentTable extends DbTable {
     /**
@@ -19,6 +21,8 @@ public class DepartmentTable extends DbTable {
     }
 
     /**
+     * Get all departments
+     *
      * @return
      * @throws SQLException
      * @throws ClassNotFoundException
@@ -40,6 +44,7 @@ public class DepartmentTable extends DbTable {
     }
 
     /**
+     * Save department
      * @param department
      */
     public void saveDepartment(Department department) throws SQLException {
@@ -51,7 +56,10 @@ public class DepartmentTable extends DbTable {
     }
 
     /**
+     * insert new record into DB
+     *
      * @param department
+     *
      */
     protected void insert(Department department) throws SQLException {
         PreparedStatement st = con.prepareStatement("INSERT INTO departments (name) VALUES (?)");
@@ -60,6 +68,7 @@ public class DepartmentTable extends DbTable {
     }
 
     /**
+     * Update existing record in DB
      * @param department
      */
     protected void update(Department department) throws SQLException {
@@ -70,6 +79,7 @@ public class DepartmentTable extends DbTable {
     }
 
     /**
+     * Return one department by id
      * @param id
      * @return
      */

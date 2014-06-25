@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
+ * Class Employee entity
  * Created by vlad on 6/24/14.
+ * @author vlad
  */
 public class Employee {
     private Integer id;

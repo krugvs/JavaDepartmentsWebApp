@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class Department entity
  * Created by vlad on 6/18/14.
+ * @author vlad
  */
 public class Department {
     private Integer id =  null;

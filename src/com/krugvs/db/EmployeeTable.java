@@ -11,7 +11,10 @@ import java.sql.Date;
 import java.util.*;
 
 /**
+ *
+ * Class to manage db requests for Employee
  * Created by vlad on 6/23/14.
+ * @author vlad
  */
 public class EmployeeTable extends DbTable {
     /**
@@ -21,6 +24,12 @@ public class EmployeeTable extends DbTable {
         super(con);
     }
 
+    /**
+     * Return all employees
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public List<Employee> getEmployees() throws SQLException, ClassNotFoundException {
         List<Employee> employees = new ArrayList<Employee>();
         Registry<Department> registryDepartment = new Registry<Department>();
@@ -62,6 +71,11 @@ public class EmployeeTable extends DbTable {
         return employees;
     }
 
+    /**
+     * Return one employee by id
+     * @param id
+     * @return
+     */
     public Employee getEmployeeById(Integer id) {
         try {
 
@@ -95,10 +109,24 @@ public class EmployeeTable extends DbTable {
 
     }
 
+    /**
+     * Return  all employees for some department
+     * @param department
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public List<Employee> getEmployeesByDepartment(Department department) throws SQLException, ClassNotFoundException {
         return getEmployeesByDepartmentId(department.getId());
     }
 
+    /**
+     * Return  all employees for department bu department id
+     * @param departmentId
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public List<Employee> getEmployeesByDepartmentId(Integer departmentId) throws SQLException, ClassNotFoundException {
         List<Employee> employees = new ArrayList<Employee>();
         Registry<Department> registryDepartment = new Registry<Department>();
@@ -141,6 +169,7 @@ public class EmployeeTable extends DbTable {
     }
 
     /**
+     * Save employee
      * @param employee
      */
     public void saveEmployee(Employee employee) throws SQLException {
@@ -152,6 +181,7 @@ public class EmployeeTable extends DbTable {
     }
 
     /**
+     * insert new record into DB
      * @param employee
      */
     protected void insert(Employee employee) throws SQLException {
@@ -177,6 +207,7 @@ public class EmployeeTable extends DbTable {
     }
 
     /**
+     * Update existing record in DB
      * @param employee
      */
     protected void update(Employee employee) throws SQLException {
@@ -196,19 +227,39 @@ public class EmployeeTable extends DbTable {
         st.execute();
     }
 
+    /**
+     * Delete employee by id
+     * @param id
+     * @throws SQLException
+     */
     public void deleteEmployeeById(Integer id) throws SQLException {
         PreparedStatement st = con.prepareStatement("DELETE FROM  `employees` WHERE  `employees`.`id` = ? ;");
         st.setInt(1, id);
         st.execute();
     }
 
+    /**
+     * Delete emplyee from DB
+     * @param employee
+     * @throws SQLException
+     */
     public void deleteEmployee(Employee employee) throws SQLException {
         deleteEmployeeById(employee.getId());
     }
 
+    /**
+     * Inner class to handle duplicates of entities
+     * @param <T>
+     */
     protected class Registry<T> {
         private Map<Integer, T> items = new HashMap<>();
 
+        /**
+         * Save item into map if it is unique ID, else return previous stored entity
+         * @param id
+         * @param item
+         * @return
+         */
         public T getById(Integer id, T item) {
             if (!items.containsKey(id)) {
                 items.put(id, item);
@@ -218,6 +269,12 @@ public class EmployeeTable extends DbTable {
             }
         }
 
+        /**
+         * Force add entity to map, replace existing entity
+         * @param id
+         * @param item
+         * @return
+         */
         public T add(Integer id, T item) {
             items.put(id, item);
             return item;

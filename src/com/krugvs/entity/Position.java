@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
+ * Class for Position entity
  * Created by vlad on 6/18/14.
+ * @author vlad
  */
 public class Position {
     private Integer id;

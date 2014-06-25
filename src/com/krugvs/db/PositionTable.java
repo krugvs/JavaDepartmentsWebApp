@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class to manage db requests for Position
  * Created by vlad on 6/18/14.
+ * @author vlad
  */
 public class PositionTable extends DbTable {
 
@@ -19,6 +21,7 @@ public class PositionTable extends DbTable {
     }
 
     /**
+     * Return all positions
      * @return
      * @throws java.sql.SQLException
      * @throws ClassNotFoundException
@@ -40,6 +43,7 @@ public class PositionTable extends DbTable {
     }
 
     /**
+     * Save position into DB
      * @param position
      */
     public void savePosition(Position position) throws SQLException {
@@ -51,6 +55,7 @@ public class PositionTable extends DbTable {
     }
 
     /**
+     * insert new record into BD
      * @param position
      */
     protected void insert(Position position) throws SQLException {
@@ -62,6 +67,7 @@ public class PositionTable extends DbTable {
     }
 
     /**
+     * update existing record into BD
      * @param position
      */
     protected void update(Position position) throws SQLException {
@@ -74,6 +80,7 @@ public class PositionTable extends DbTable {
     }
 
     /**
+     * return Position by ID
      * @param id
      * @return
      */

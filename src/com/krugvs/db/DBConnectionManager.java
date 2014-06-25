@@ -7,11 +7,23 @@ package com.krugvs.db;
 import java.sql.*;
 import com.mysql.jdbc.Driver;
 
+/**
+ * Manage DB connection
+ * @author vlad
+ */
 public class DBConnectionManager {
 
     private static Connection connection;
     private static DBConnectionManager instance = null;
 
+    /**
+     * Creating new connection from url and credentials
+     * @param dbURL
+     * @param user
+     * @param password
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public DBConnectionManager(String dbURL, String user, String password) throws ClassNotFoundException, SQLException{
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -21,8 +33,6 @@ public class DBConnectionManager {
         }
 
         connection = DriverManager.getConnection(dbURL, user, password);
-        //PreparedStatement st = connection.prepareStatement("set names utf8");
-        //st.execute();
     }
 
     public Connection getConnection(){
