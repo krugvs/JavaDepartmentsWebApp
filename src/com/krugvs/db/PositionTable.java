@@ -54,7 +54,7 @@ public class PositionTable extends DbTable {
      * @param position
      */
     protected void insert(Position position) throws SQLException {
-        PreparedStatement st = con.prepareStatement("INSERT INTO positions (name, minSalary, maxSalary) VALUES ((?),(?),(?))");
+        PreparedStatement st = con.prepareStatement("INSERT INTO positions (name, minSalary, maxSalary) VALUES ( ? , ?, ?)");
         st.setString(1, position.getName());
         st.setBigDecimal(2, position.getMinSalary());
         st.setBigDecimal(3, position.getMaxSalary());
@@ -65,7 +65,7 @@ public class PositionTable extends DbTable {
      * @param position
      */
     protected void update(Position position) throws SQLException {
-        PreparedStatement st = con.prepareStatement("UPDATE `positions` SET  `name` =  (?) , `minSalary` = (?), `maxSalary` = (?) WHERE  `id` = (?) ;");
+        PreparedStatement st = con.prepareStatement("UPDATE `positions` SET  `name` =  ? , `minSalary` = ?, `maxSalary` = ? WHERE  `id` = ? ;");
         st.setString(1, position.getName());
         st.setBigDecimal(2, position.getMinSalary());
         st.setBigDecimal(3, position.getMaxSalary());
@@ -80,7 +80,7 @@ public class PositionTable extends DbTable {
     public Position getPositionById(Integer id) {
         try {
 
-            PreparedStatement st = con.prepareStatement("select  id, name, minSalary, maxSalary  from positions where id=(?)");
+            PreparedStatement st = con.prepareStatement("select  id, name, minSalary, maxSalary  from positions where id= ?");
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {

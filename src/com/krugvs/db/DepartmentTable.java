@@ -63,7 +63,7 @@ public class DepartmentTable extends DbTable {
      * @param department
      */
     protected void update(Department department) throws SQLException {
-        PreparedStatement st = con.prepareStatement("UPDATE `departments` SET  `name` =  (?) WHERE  `departments`.`id` = (?) ;");
+        PreparedStatement st = con.prepareStatement("UPDATE `departments` SET  `name` =  ? WHERE  `departments`.`id` = ? ;");
         st.setString(1, department.getName());
         st.setInt(2, department.getId());
         st.execute();
@@ -76,7 +76,7 @@ public class DepartmentTable extends DbTable {
     public Department getDepartmentById(Integer id) {
         try {
 
-            PreparedStatement st = con.prepareStatement("select id, name from departments where id= (?) ");
+            PreparedStatement st = con.prepareStatement("select id, name from departments where id= ? ");
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
