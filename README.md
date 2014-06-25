@@ -56,9 +56,9 @@ We hope it will work on any platform ;)
 
 ###Used java libraries 
 
-javax.servlet-api-3.1.0.jar
-jstl-1.2.jar
-mysql-connector-java-5.1.31-bin.jar
+* javax.servlet-api-3.1.0.jar
+* jstl-1.2.jar
+* mysql-connector-java-5.1.31-bin.jar
 
 ##Known issues
 
