@@ -56,7 +56,10 @@
                             <td><%=employee.getBirthday()%></td>
                             <td><%=employee.getDepartment().getName()%></td>
                             <td><%=employee.getPosition().getName()%></td>
-                            <td><a href="<%=request.getContextPath()%>/employees/edit/?id=<%=employee.getId()%>">Edit</a></td>
+                            <td>
+                                <a href="<%=request.getContextPath()%>/employees/edit/?id=<%=employee.getId()%>">Edit</a>
+                                <a href="<%=request.getContextPath()%>/employees/edit/?id=<%=employee.getId()%>&action=delete">Delete</a>
+                            </td>
                         </tr>
 
                         <%}%>

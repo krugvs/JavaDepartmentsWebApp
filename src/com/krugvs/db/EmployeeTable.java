@@ -99,7 +99,7 @@ public class EmployeeTable extends DbTable {
      * @param employee
      */
     public void saveEmployee(Employee employee) throws SQLException {
-        if (employee.getId() == null) {
+        if (employee.getId() == 0) {
             insert(employee);
         } else {
             update(employee);
@@ -110,10 +110,24 @@ public class EmployeeTable extends DbTable {
      * @param employee
      */
     protected void insert(Employee employee) throws SQLException {
-        PreparedStatement st = con.prepareStatement("INSERT INTO employees (name, minSalary, maxSalary) VALUES ((?),(?),(?))");
+        PreparedStatement st = con.prepareStatement("INSERT INTO  `employees` (\n" +
+                "`id` ,\n" +
+                "`username` ,\n" +
+                "`birthday` ,\n" +
+                "`passport` ,\n" +
+                "`salary` ,\n" +
+                "`department_id` ,\n" +
+                "`position_id`\n" +
+                ")\n" +
+                "VALUES (\n" +
+                "NULL ,  ?,  ?,  ?,  ?,  ?,  ?\n" +
+                ");\n");
         st.setString(1, employee.getName());
-        //st.setBigDecimal(2, employee.getMinSalary());
-        //st.setBigDecimal(3, employee.getMaxSalary());
+        st.setDate(2, new java.sql.Date(employee.getBirthday().getTime()));
+        st.setString(3, employee.getPassportNumber());
+        st.setBigDecimal(4, employee.getSalary());
+        st.setInt(5, employee.getDepartment().getId());
+        st.setInt(6, employee.getPosition().getId());
         st.execute();
     }
 
