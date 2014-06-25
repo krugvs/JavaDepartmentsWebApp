@@ -95,6 +95,51 @@ public class EmployeeTable extends DbTable {
 
     }
 
+    public List<Employee> getEmployeesByDepartment(Department department) throws SQLException, ClassNotFoundException {
+        return getEmployeesByDepartmentId(department.getId());
+    }
+
+    public List<Employee> getEmployeesByDepartmentId(Integer departmentId) throws SQLException, ClassNotFoundException {
+        List<Employee> employees = new ArrayList<Employee>();
+        Registry<Department> registryDepartment = new Registry<Department>();
+        Registry<Position> registryPosition = new Registry<Position>();
+        try{
+
+            PreparedStatement st = con.prepareStatement("SELECT `employees`.*, `departments`.*,  `positions`.* FROM `employees` JOIN `departments` ON employees.department_id=departments.id  JOIN `positions` ON employees.position_id=positions.id where employees.department_id = ? ");
+            st.setInt(1, departmentId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Integer id = rs.getInt("employees.id");
+                String name = rs.getString("employees.username");
+                java.util.Date birthday = rs.getDate("employees.birthday");
+                String passportNumber = rs.getString("employees.passport");
+                BigDecimal salary = rs.getBigDecimal("employees.salary");
+                Integer Position_id = rs.getInt("positions.id");
+                String Position_name = rs.getString("positions.name");
+                BigDecimal Position_minSalary = rs.getBigDecimal("positions.minSalary");
+                BigDecimal Position_maxSalary = rs.getBigDecimal("positions.maxSalary");
+                Integer Department_id = rs.getInt("departments.id");
+                String Department_name = rs.getString("departments.name");
+
+                Department department = new Department(Department_name, Department_id);
+                Position position = new Position(Position_id, Position_name, Position_minSalary, Position_maxSalary);
+                department = registryDepartment.getById(Department_id, department);
+                position = registryPosition.getById(Position_id, position);
+
+                Employee employee = new Employee(id, name, birthday, passportNumber, salary, department, position);
+                employees.add(employee);
+                System.out.println(rs);
+                System.out.println(rs.getInt("employees.id"));
+                System.out.println(rs.getString("departments.name"));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return employees;
+    }
+
     /**
      * @param employee
      */
@@ -158,9 +203,7 @@ public class EmployeeTable extends DbTable {
     }
 
     public void deleteEmployee(Employee employee) throws SQLException {
-        PreparedStatement st = con.prepareStatement("DELETE FROM  `employees` WHERE  `employees`.`id` = ? ;");
-        st.setInt(1, employee.getId());
-        st.execute();
+        deleteEmployeeById(employee.getId());
     }
 
     protected class Registry<T> {

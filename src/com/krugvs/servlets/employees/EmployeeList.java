@@ -21,11 +21,20 @@ public class EmployeeList extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //delete action handle
+        Integer depid = 0;
+        if (req.getParameter("depid")!=null && req.getParameter("depid").trim().toString()!=""){
+            depid = Integer.parseInt(req.getParameter("depid").trim());
+        }
         Connection con = (Connection) getServletContext().getAttribute("DBConnection");
         EmployeeTable employeeTable = new EmployeeTable(con);
         java.util.List<Employee> listEmployees = new ArrayList<Employee>();
         try {
-            listEmployees = employeeTable.getEmployees();
+            if (depid>0){
+                listEmployees = employeeTable.getEmployeesByDepartmentId(depid);
+            }else{
+                listEmployees = employeeTable.getEmployees();
+            }
             System.out.println(listEmployees);
         } catch (SQLException e) {
             e.printStackTrace();

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.krugvs.entity.Department" %>
 <%@ page import="java.util.List" %>
 
@@ -43,8 +44,14 @@
                             {%>
                         <tr>
                             <td><%=dep.getId()%></td>
-                            <td><%=dep.getName()%></td>
-                            <td><a href="<%=request.getContextPath()%>/departments/edit/?id=<%=dep.getId()%>">Edit</a></td>
+                            <td>
+
+                                <a href="<%=request.getContextPath()%>/employees?depid=<%=dep.getId()%>" title="See List of employees"><%=dep.getName()%></a>
+                            </td>
+                            <td>
+                                <a href="<%=request.getContextPath()%>/departments/edit/?id=<%=dep.getId()%>">Edit</a>&nbsp;|&nbsp;
+                                <a href="<%=request.getContextPath()%>/employees?depid=<%=dep.getId()%>">List of employees</a>
+                            </td>
                         </tr>
 
                         <%}%>
