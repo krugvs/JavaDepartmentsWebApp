@@ -52,7 +52,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Birthday</label>
-                                <input class="form-control" placeholder="Please type Birthday" value="<c:out value="${requestScope.employee.birthday}"/>" name="birthday">
+                                <input class="form-control" placeholder="Please type Birthday YYYY-MM-DD " value="<c:out value="${requestScope.employee.birthday}"/>" name="birthday">
                             </div>
                             <div class="form-group">
                                 <label>Passport number</label>

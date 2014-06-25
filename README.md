@@ -1,7 +1,7 @@
 JavaDepartmentsWebApp
 =====================
 
-This is first application for DA after learning Java at DA Java School.
+This is the first application for DA after learning Java at a DA Java School.
  
 ##Preparing DB
 
@@ -33,7 +33,7 @@ At line 17 you can see this code:
         <param-value>jdbc:mysql://dbhost:3306/dbname?useUnicode=true&amp;characterEncoding=UTF-8</param-value>
     </context-param>
     
-Replase dbuser, dbpassword, dbhost, dbname in <param-value></param-value> tag to your correct values.
+Replace dbuser, dbpassword, dbhost, dbname in <param-value></param-value> tag to your correct values.
 
 ##Build application
 
@@ -62,10 +62,10 @@ We hope it will work on any platform ;)
 
 ##Known issues
 
-* There is not any validations, need to input correct data in appropriate formats
-* There is not validation for salary and corresponding positions
+* There are no validations, there is a need to input correct data in appropriate formats
+* There is no validation for salary and corresponding positions
 * There are CSRF or XSS vulnerabilities
-* There is Employee delete function is using GET method instead POST
+* There is Employee delete function, it is using GET method instead POST
 
 
 

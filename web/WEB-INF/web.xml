@@ -16,11 +16,11 @@
 
     <context-param>
         <param-name>dbUser</param-name>
-        <param-value>ODBC</param-value>
+        <param-value>root</param-value>
     </context-param>
     <context-param>
         <param-name>dbPassword</param-name>
-        <param-value>ODBC</param-value>
+        <param-value>1234567</param-value>
     </context-param>
     <context-param>
         <param-name>dbURL</param-name>
