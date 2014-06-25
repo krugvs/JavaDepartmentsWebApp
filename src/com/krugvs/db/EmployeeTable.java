@@ -151,6 +151,18 @@ public class EmployeeTable extends DbTable {
         st.execute();
     }
 
+    public void deleteEmployeeById(Integer id) throws SQLException {
+        PreparedStatement st = con.prepareStatement("DELETE FROM  `employees` WHERE  `employees`.`id` = ? ;");
+        st.setInt(1, id);
+        st.execute();
+    }
+
+    public void deleteEmployee(Employee employee) throws SQLException {
+        PreparedStatement st = con.prepareStatement("DELETE FROM  `employees` WHERE  `employees`.`id` = ? ;");
+        st.setInt(1, employee.getId());
+        st.execute();
+    }
+
     protected class Registry<T> {
         private Map<Integer, T> items = new HashMap<>();
 

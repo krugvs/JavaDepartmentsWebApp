@@ -30,8 +30,21 @@ public class EmployeeEdit  extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter("id").trim());
-
         Connection con = (Connection) getServletContext().getAttribute("DBConnection");
+
+        //delete action handle
+        if (req.getParameter("action")!=null && req.getParameter("action").equals("delete")){
+
+            EmployeeTable employeeTable = new EmployeeTable(con);
+            try {
+                employeeTable.deleteEmployeeById(id);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            resp.setStatus(resp.SC_MOVED_TEMPORARILY);
+            resp.setHeader("Location", req.getContextPath() + "/employees");
+        }
+
         DepartmentTable dt = new DepartmentTable(con);
         java.util.List<Department> listDepartments = new ArrayList<Department>();
         try {

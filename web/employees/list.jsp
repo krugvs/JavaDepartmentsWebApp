@@ -6,11 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.krugvs.entity.Department" %>
 <%@ page import="com.krugvs.entity.Position" %>
 <%@ page import="com.krugvs.entity.Employee" %>
 <%@ page import="java.util.List" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <jsp:include page="/elements/header.jsp" />
@@ -45,24 +45,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%
-                            List<Employee> employees = (List<Employee>) request.getAttribute("listEmployees");
-                            for (Employee employee : employees)
-                            {%>
+                        <c:forEach var="employee" items="${requestScope.listEmployees}">
                         <tr>
-                            <td><%=employee.getId()%></td>
-                            <td><%=employee.getName()%></td>
-                            <td><%=employee.getSalary()%></td>
-                            <td><%=employee.getBirthday()%></td>
-                            <td><%=employee.getDepartment().getName()%></td>
-                            <td><%=employee.getPosition().getName()%></td>
+                            <td><c:out value="${employee.id}"/></td>
+                            <td><c:out value="${employee.name}"/></td>
+                            <td><c:out value="${employee.salary}"/></td>
+                            <td><c:out value="${employee.birthday}"/></td>
+                            <td><c:out value="${employee.department.name}"/></td>
+                            <td><c:out value="${employee.position.name}"/></td>
                             <td>
-                                <a href="<%=request.getContextPath()%>/employees/edit/?id=<%=employee.getId()%>">Edit</a>
-                                <a href="<%=request.getContextPath()%>/employees/edit/?id=<%=employee.getId()%>&action=delete">Delete</a>
+                                <a href="<%=request.getContextPath()%>/employees/edit/?id=<c:out value="${employee.id}"/>">Edit</a>
+                                <a href="<%=request.getContextPath()%>/employees/edit/?id=<c:out value="${employee.id}"/>&action=delete">Delete</a>
                             </td>
                         </tr>
 
-                        <%}%>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>

@@ -45,7 +45,7 @@
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
             <li>
-                <a href="/"><i class="fa fa-dashboard fa-fw"></i> Start page</a>
+                <a href="<%=request.getContextPath()%>/"><i class="fa fa-dashboard fa-fw"></i> Start page</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Departments<span class="fa arrow"></span></a>
