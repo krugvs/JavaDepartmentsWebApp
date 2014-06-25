@@ -28,8 +28,7 @@ public class DepartmentEdit  extends HttpServlet {
             Department department;
             department = departmentTable.getDepartmentById(id);
             if (department.getId()!=null) {
-                req.setAttribute("departmentName", department.getName());
-                req.setAttribute("departmentId", department.getId());
+                req.setAttribute("department", department);
                 req.setAttribute("actionUrl", req.getContextPath() + "/departments/edit/?id="+id);
                 getServletContext().getRequestDispatcher("/departments/add.jsp").forward(req, resp);
             }
@@ -51,6 +50,7 @@ public class DepartmentEdit  extends HttpServlet {
 
         if (!name.equals("") && id!=0) {
             Department department = new Department(name, id);
+            req.setAttribute("department", department);
             Connection con = (Connection) getServletContext().getAttribute("DBConnection");
             DepartmentTable dt = new DepartmentTable(con);
             try {
@@ -62,8 +62,7 @@ public class DepartmentEdit  extends HttpServlet {
             resp.setStatus(resp.SC_MOVED_TEMPORARILY);
             resp.setHeader("Location", req.getContextPath() + "/departments");
         }
-        req.setAttribute("departmentName", name);
-        req.setAttribute("departmentId", id);
+
         req.setAttribute("actionUrl", req.getContextPath() + "/departments/edit/?id="+id);
         getServletContext().getRequestDispatcher("/departments/add.jsp").forward(req, resp);
     }

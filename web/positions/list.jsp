@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.krugvs.entity.Position" %>
 <%@ page import="java.util.List" %>
 
@@ -39,19 +40,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%
-                            List<Position> positions = (List<Position>) request.getAttribute("listPositions");
-                            for (Position position : positions)
-                            {%>
+                        <c:forEach var="position" items="${requestScope.listPositions}">
                         <tr>
-                            <td><%=position.getId()%></td>
-                            <td><%=position.getName()%></td>
-                            <td><%=position.getMinSalary()%></td>
-                            <td><%=position.getMaxSalary()%></td>
-                            <td><a href="<%=request.getContextPath()%>/positions/edit/?id=<%=position.getId()%>">Edit</a></td>
+                            <td><c:out value="${position.id}"/></td>
+                            <td><c:out value="${position.name}"/></td>
+                            <td><c:out value="${position.minSalary}"/></td>
+                            <td><c:out value="${position.maxSalary}"/></td>
+                            <td><a href="<%=request.getContextPath()%>/positions/edit/?id=<c:out value="${position.id}"/>">Edit</a></td>
                         </tr>
 
-                        <%}%>
+                        </c:forEach>
 
                         </tbody>
                     </table>

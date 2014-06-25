@@ -11,19 +11,16 @@
 <%@ page import="java.util.List" %>
 
 <jsp:include page="/elements/header.jsp" />
-<%
-    String departmentName = request.getAttribute("departmentName").toString();
-    Integer departmentId  = (Integer)request.getAttribute("departmentId");
-    String actionUrl      = request.getAttribute("actionUrl").toString();
-%>
-
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Departments:  <% if (departmentId!=null){%>
-            <%="Edit \""+departmentName+"\""%>
-            <%}else{%>
-            Add new
-            <%}%></h1>
+        <h1 class="page-header">Departments:
+            <c:if test="${requestScope.department.id ne null}">
+                Edit <c:out value="${requestScope.department.name}"/>
+            </c:if>
+            <c:if test="${requestScope.department.id eq null}">
+                Add new department
+            </c:if>
+        </h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -33,20 +30,21 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <% if (departmentId!=null){%>
-                <%="Edit \""+departmentName+"\""%>
-                <%}else{%>
+                <c:if test="${requestScope.department.id ne null}">
+                    Edit <c:out value="${requestScope.department.name}"/>
+                </c:if>
+                <c:if test="${requestScope.department.id eq null}">
                     Add new department
-                <%}%>
+                </c:if>
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form role="form" action="<%=actionUrl%>" enctype="application/x-www-form-urlencoded" method="post">
+                        <form role="form" action="<c:out value="${requestScope.actionUrl}"/>" enctype="application/x-www-form-urlencoded" method="post">
                             <div class="form-group">
                                 <label>Department name</label>
-                                <input class="form-control" placeholder="Please type department name" value="<%=departmentName%>" name="name">
-                                <input value="<%=departmentId%>" name="id" type="hidden">
+                                <input class="form-control" placeholder="Please type department name" value="<c:out value="${requestScope.department.name}"/>" name="name">
+                                <input value="<c:out value="${requestScope.department.id}"/>" name="id" type="hidden">
                             </div>
 
                             <button type="submit" class="btn btn-default">Submit</button>

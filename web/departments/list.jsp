@@ -38,23 +38,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%
-                            List<Department> departments = (List<Department>) request.getAttribute("listDepartments");
-                            for (Department dep : departments)
-                            {%>
-                        <tr>
-                            <td><%=dep.getId()%></td>
-                            <td>
+                        <c:forEach var="department" items="${requestScope.listDepartments}">
+                            <tr>
+                                <td><c:out value="${department.id}"/></td>
+                                <td>
 
-                                <a href="<%=request.getContextPath()%>/employees?depid=<%=dep.getId()%>" title="See List of employees"><%=dep.getName()%></a>
-                            </td>
-                            <td>
-                                <a href="<%=request.getContextPath()%>/departments/edit/?id=<%=dep.getId()%>">Edit</a>&nbsp;|&nbsp;
-                                <a href="<%=request.getContextPath()%>/employees?depid=<%=dep.getId()%>">List of employees</a>
-                            </td>
-                        </tr>
+                                    <a href="<%=request.getContextPath()%>/employees?depid=<c:out value="${department.id}"/>" title="See List of employees"><c:out value="${department.name}"/></a>
+                                </td>
+                                <td>
+                                    <a href="<%=request.getContextPath()%>/departments/edit/?id=<c:out value="${department.id}"/>">Edit</a>&nbsp;|&nbsp;
+                                    <a href="<%=request.getContextPath()%>/employees?depid=<c:out value="${department.id}"/>">List of employees</a>
+                                </td>
+                            </tr>
 
-                        <%}%>
+                        </c:forEach>
 
                         </tbody>
                     </table>
